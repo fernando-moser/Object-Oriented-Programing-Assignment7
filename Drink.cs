@@ -6,13 +6,13 @@
         public bool Hot;
         public double Size;
 
-        public Drink() => Size = 300.0;
+        public Drink(double size) => Size = Size > 150 ? Size = size : 300.0;
 
         public Drink(string name, bool hot, double size)
+            : this(size)
         {
             Name = name;
             Hot = hot;
-            Size = Size > 150 ? Size = size : 300.0;
         }
 
         public virtual string Prepare() => $"Preparing {Name} ";
@@ -21,7 +21,7 @@
 
         public virtual string Serve() => $"Serving {Name}";
 
-        public virtual string Display() => $"{Name}, {(Hot ? "Hot" : "Cold")}, {Size}, ";
+        public virtual string Display() => $"{Name}, {(Hot ? "Hot" : "Cold")}, ";
 
 
     }

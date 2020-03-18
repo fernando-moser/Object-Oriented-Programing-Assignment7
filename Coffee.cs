@@ -30,7 +30,7 @@ namespace Lab7_v2
 
         public override string Heat() => $" {base.Heat()} water";
 
-        public override string Serve() => $"Pouring {Name} in a mug -> putting lid -> putting holder -> {base.Serve()}";
+        public override string Serve() => $"Pouring {Name} in a cup -> putting lid -> putting holder -> {base.Serve()}";
 
         public string AddSugar() => $" -> Adding suggar";
         public string AddCream() => $" -> Adding Cream";

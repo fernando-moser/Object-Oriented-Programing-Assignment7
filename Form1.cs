@@ -29,11 +29,18 @@ namespace Lab7_v2
             lstDisplay.Items.Clear();
             int blendIndex = lstBlend.SelectedIndex;
             int drinkIndex = lstDrinks.SelectedIndex;
-            //Code if it is a Coffee
-            if (lstDrinks.Items[drinkIndex].ToString() == "Coffee")
-                PrepareCoffee(drinkIndex, blendIndex);
-            //Code if there were others drink types
+            if (blendIndex == -1 || drinkIndex == -1)
+            {
+                MessageBox.Show("Drink and Blend must be selected", "Insuficient information");
+            }
+            else
+            {
+                //Code if it is a Coffee
+                if (lstDrinks.Items[drinkIndex].ToString() == "Coffee")
+                    PrepareCoffee(drinkIndex, blendIndex);
+                //Code if there were others drink options
 
+            }
         }
 
         private void RefreshDrinkList()
@@ -64,56 +71,50 @@ namespace Lab7_v2
             bool cream = radCream.Checked;
             bool sugar = radSugar.Checked;
 
-            if (blendIndex == -1 || drinkIndex == -1)
+
+            Coffee coffee = null;
+            if (lstBlend.SelectedIndex == 0)
             {
-                MessageBox.Show("Drink and Blend must be selected", "Insuficient information");
+                if (sugar && cream)
+                    coffee = new Coffee(300.0, true, true, "Regular");
+                else if (sugar && !cream)
+                    coffee = new Coffee(300.0, true, false, "Regular");
+                else if (!sugar && cream)
+                    coffee = new Coffee(300.0, false, true, "Regular");
+                else
+                    coffee = new Coffee(300.0, false, false, "Regular");
             }
             else
             {
-                Coffee coffee = null;
-                if (lstBlend.SelectedIndex == 0)
-                {
-                    if (sugar && cream)
-                        coffee = new Coffee(300.0, true, true, "Regular");
-                    else if (sugar && !cream)
-                        coffee = new Coffee(300.0, true, false, "Regular");
-                    else if (!sugar && cream)
-                        coffee = new Coffee(300.0, false, true, "Regular");
-                    else
-                        coffee = new Coffee(300.0, false, false, "Regular");
-                }
+                if (sugar && cream)
+                    coffee = new Coffee(300.0, true, true, "Dark");
+                else if (sugar && !cream)
+                    coffee = new Coffee(300.0, true, false, "Dark");
+                else if (!sugar && cream)
+                    coffee = new Coffee(300.0, false, true, "Dark");
                 else
-                {
-                    if (sugar && cream)
-                        coffee = new Coffee(300.0, true, true, "Dark");
-                    else if (sugar && !cream)
-                        coffee = new Coffee(300.0, true, false, "Dark");
-                    else if (!sugar && cream)
-                        coffee = new Coffee(300.0, false, true, "Dark");
-                    else
-                        coffee = new Coffee(300.0, false, false, "Dark");
-                }
+                    coffee = new Coffee(300.0, false, false, "Dark");
+            }
 
-                bool isCoffeeReady = false;
-                foreach (Coffee item in drinkList)
+            bool isCoffeeReady = false;
+            foreach (Coffee item in drinkList)
+            {
+                if (coffee == item)
                 {
-                    if (coffee == item)
-                    {
-                        isCoffeeReady = true;
-                        break;
-                    }
+                    isCoffeeReady = true;
+                    break;
                 }
+            }
 
-                if (isCoffeeReady)
-                    lstDisplay.Items.Add($"There is a coffee ready for you, there's no need to wait preparation!!");
-                else
-                {
-                    lstDisplay.Items.Add(coffee.Prepare());
-                    lstDisplay.Items.Add(coffee.Serve());
-                    lstReady.Items.Add(coffee.Display());
-                    drinkList.Add(coffee);
-                    RefreshDrinkList();
-                }
+            if (isCoffeeReady)
+                lstDisplay.Items.Add($"There is a coffee ready for you, there's no need to wait preparation!!");
+            else
+            {
+                lstDisplay.Items.Add(coffee.Prepare());
+                lstDisplay.Items.Add(coffee.Serve());
+                lstReady.Items.Add(coffee.Display());
+                drinkList.Add(coffee);
+                RefreshDrinkList();
             }
         }
 
