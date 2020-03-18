@@ -15,11 +15,13 @@
             Size = Size > 150 ? Size = size : 300.0;
         }
 
-        public virtual string Prepare() => $"Preparing {Name}";
+        public virtual string Prepare() => $"Preparing {Name} ";
 
-        public virtual string Heat() => $"Heating {Name}";
+        public virtual string Heat() => $"Heating ";
 
         public virtual string Serve() => $"Serving {Name}";
+
+        public virtual string Display() => $"{Name}, {(Hot ? "Hot" : "Cold")}, {Size}, ";
 
 
     }
