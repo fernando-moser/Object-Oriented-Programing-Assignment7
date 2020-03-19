@@ -22,6 +22,8 @@ namespace Lab7_v2
 
             lstReady.Items.Add(c1.Display());
             lstReady.Items.Add(c2.Display());
+
+            lstDrinks.SelectedIndex = 0;
         }
 
         private void BtnPrepare_Click(object sender, EventArgs e)
@@ -72,7 +74,7 @@ namespace Lab7_v2
             bool sugar = radSugar.Checked;
 
 
-            Coffee coffee = null;
+            Coffee coffee;
             if (lstBlend.SelectedIndex == 0)
             {
                 if (sugar && cream)
