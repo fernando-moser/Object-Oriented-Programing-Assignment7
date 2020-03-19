@@ -22,8 +22,6 @@ namespace Lab7_v2
 
             lstReady.Items.Add(c1.Display());
             lstReady.Items.Add(c2.Display());
-
-            lstDrinks.SelectedIndex = 0;
         }
 
         private void BtnPrepare_Click(object sender, EventArgs e)
